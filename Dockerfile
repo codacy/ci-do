@@ -25,4 +25,5 @@ RUN sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS && 
     curl -sL https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
+    chown -R root:root /usr/local/bin/ &&\
     rm -rf *
