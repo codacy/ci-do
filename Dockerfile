@@ -17,7 +17,7 @@ ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TE
 ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS ./
 
 RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
-    pip3 install --upgrade pip setuptools && \
+    pip3 install --upgrade pip==${PIP_VERSION} setuptools==${SETUPTOOLS_VERSION} && \
     pip3 --no-cache-dir install -r requirements.pip && \
     sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
@@ -28,6 +28,7 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
     helm init --client-only && \
     helm plugin install https://github.com/codacy/helm-ssm/releases/download/${HELM_SSM_VERSION}/helm-ssm-linux.tgz && \
     helm plugin install https://github.com/chartmuseum/helm-push && \
+    helm repo add codacy-stable https://charts.codacy.com/stable/ && \
     curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
     chmod +x /usr/local/bin/kubectl && \
     curl -sL https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && \
