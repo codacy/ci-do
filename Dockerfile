@@ -35,5 +35,8 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
     apk add libc6-compat && \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
+    curl -sO https://github.com/mikefarah/yq/releases/download/2.4.0/yq_linux_amd64 && \
+    mv yq_linux_amd64 /usr/local/bin/yq && \
+    chmod +x /usr/local/bin/yq && \
     chown -R root:root /usr/local/bin/ &&\
     rm -rf ./*
