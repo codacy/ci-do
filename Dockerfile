@@ -31,12 +31,12 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
     helm repo add codacy-stable https://charts.codacy.com/stable/ && \
     curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
     chmod +x /usr/local/bin/kubectl && \
+    curl -Lo /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/download/2.4.0/yq_linux_amd64" && \
+    chmod +x /usr/local/bin/yq && \
     curl -sL https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && \
     apk add libc6-compat && \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
-    curl -sO https://github.com/mikefarah/yq/releases/download/2.4.0/yq_linux_amd64 && \
-    mv yq_linux_amd64 /usr/local/bin/yq && \
-    chmod +x /usr/local/bin/yq && \
+    
     chown -R root:root /usr/local/bin/ &&\
     rm -rf ./*
