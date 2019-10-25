@@ -32,7 +32,8 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
     curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
     chmod +x /usr/local/bin/kubectl && \
     curl -sL https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && \
-    apk add libc6-compat && \
+    apk add libc6-compat make musl-dev go&& \
+    go get gopkg.in/mikefarah/yq.v2 && \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
     chown -R root:root /usr/local/bin/ &&\
