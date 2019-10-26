@@ -6,7 +6,7 @@ Docker image to be used in Continuous Integration environments such as CircleCI,
 
 ## Usage
 
-#### CircleCI
+### CircleCI
 
 Use this image directly on CircleCI for simple steps
 
