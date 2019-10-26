@@ -10,7 +10,7 @@ Docker image to be used in Continuous Integration environments such as CircleCI,
 
 Use this image directly on CircleCI for simple steps
 
-```
+```yaml
 version: 2
 jobs:
   build:
