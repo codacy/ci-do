@@ -34,9 +34,9 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
     curl -Lo /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/download/2.4.0/yq_linux_amd64" && \
     chmod +x /usr/local/bin/yq && \
     curl -sL https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && \
-    apk add libc6-compat && \
+    apk add libc6-compat sudo util-linux&& \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
-    
+    curl -sSL https://git.io/git-extras-setup | sudo bash /dev/stdin &&\
     chown -R root:root /usr/local/bin/ &&\
     rm -rf ./*
