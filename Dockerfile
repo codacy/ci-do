@@ -4,9 +4,9 @@ LABEL maintainer="Codacy <team@codacy.com>"
 
 ENV TERRAFORM_VERSION=0.12.12
 ENV HELM_VERSION=v2.15.1
-ENV HELM_SSM_VERSION=1.0.2
-ENV KUBECTL_VERSION=v1.13.4
-ENV DOCTL_VERSION=1.18.0
+ENV HELM_SSM_VERSION=1.0.3
+ENV KUBECTL_VERSION=v1.16.2
+ENV DOCTL_VERSION=1.33.1
 
 COPY requirements.pip .
 
@@ -26,7 +26,7 @@ RUN sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS && 
     curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
     chmod +x /usr/local/bin/kubectl && \
     curl -sL https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && \
-    apk add libc6-compat && \
+    apk add --no-cache libc6-compat && \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
     chown -R root:root /usr/local/bin/ &&\
