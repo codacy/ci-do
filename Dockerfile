@@ -7,12 +7,19 @@ ENV HELM_VERSION=v2.15.1
 ENV HELM_SSM_VERSION=1.0.3
 ENV KUBECTL_VERSION=v1.16.2
 ENV DOCTL_VERSION=1.33.1
+ENV PYTHON3_VERSION=3.6.9-r1
+ENV PIP_VERSION=19.3.1
+ENV SETUPTOOLS_VERSION=41.4.0
 
 COPY requirements.pip .
 
 ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip ./
 ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS ./
 
+RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
+    pip3 install --upgrade pip==${PIP_VERSION} setuptools==${SETUPTOOLS_VERSION} && \
+    pip3 --no-cache-dir install -r requirements.pip && \
+    sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS
 RUN sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin && \
