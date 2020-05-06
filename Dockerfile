@@ -3,7 +3,7 @@ FROM codacy/ci-base:1.0.1
 LABEL maintainer="Codacy <team@codacy.com>"
 
 ENV TERRAFORM_VERSION=0.12.21
-ENV HELM_VERSION=v2.16.3
+ENV HELM_VERSION=v3.2.0
 ENV HELM_SSM_VERSION=1.0.3
 ENV KUBECTL_VERSION=v1.16.2
 ENV DOCTL_VERSION=1.33.1
@@ -23,10 +23,9 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} && \
 RUN sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin && \
-    curl -L "https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar -zxf - && \
+    curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar -zxf - && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     chmod +x /usr/local/bin/helm && \
-    helm init --client-only && \
     helm plugin install https://github.com/codacy/helm-ssm/releases/download/${HELM_SSM_VERSION}/helm-ssm-linux.tgz && \
     helm plugin install https://github.com/chartmuseum/helm-push && \
     helm plugin install https://github.com/codacy/helm-poll/releases/download/latest/helm-poll-linux.tgz && \
