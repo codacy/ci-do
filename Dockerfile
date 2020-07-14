@@ -36,5 +36,7 @@ RUN sed -i '/.*linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS && 
     apk add --no-cache libc6-compat && \
     mv doctl /usr/local/bin && \
     chmod +x /usr/local/bin/doctl && \
+    wget -q -O /usr/bin/yq $(wget -q -O - https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets[] | select(.name == "yq_linux_amd64") | .browser_download_url') &&\
+    chmod +x /usr/bin/yq &&\
     chown -R root:root /usr/local/bin/ &&\
     rm -rf ./*
