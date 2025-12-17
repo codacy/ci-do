@@ -2,7 +2,6 @@ FROM codacy/ci-base:3.0.2
 
 ENV TERRAFORM_VERSION=0.13.2
 ENV HELM_VERSION=v3.19.0
-ENV HELM_SSM_VERSION=3.1.0
 ENV HELM_PUSH_VERSION=0.10.4
 ENV KUBECTL_VERSION=v1.31.0
 ENV DOCTL_VERSION=1.148.0
@@ -24,7 +23,7 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} py3-pip && \
     curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar -zxf - && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     chmod +x /usr/local/bin/helm && \
-    helm plugin install https://github.com/codacy/helm-ssm --version ${HELM_SSM_VERSION} && \
+    helm plugin install https://github.com/codacy/helm-ssm && \
     helm plugin install https://github.com/chartmuseum/helm-push --version ${HELM_PUSH_VERSION} && \
     helm plugin install https://github.com/codacy/helm-poll && \
     helm repo add codacy-stable https://charts.codacy.com/stable/ && \
