@@ -24,7 +24,7 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} py3-pip && \
     curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar -zxf - && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     chmod +x /usr/local/bin/helm && \
-    helm plugin install https://github.com/codacy/helm-ssm/releases/download/${HELM_SSM_VERSION}/helm-ssm-linux.tgz && \
+    helm plugin install https://github.com/codacy/helm-ssm && \
     helm plugin install https://github.com/chartmuseum/helm-push --version ${HELM_PUSH_VERSION} && \
     helm plugin install https://github.com/codacy/helm-poll/releases/download/latest/helm-poll-linux.tgz && \
     helm repo add codacy-stable https://charts.codacy.com/stable/ && \
