@@ -24,9 +24,9 @@ RUN apk add --no-cache python3==${PYTHON3_VERSION} py3-pip && \
     curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar -zxf - && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     chmod +x /usr/local/bin/helm && \
-    helm plugin install https://github.com/codacy/helm-ssm && \
+    helm plugin install https://github.com/codacy/helm-ssm --version ${HELM_SSM_VERSION} && \
     helm plugin install https://github.com/chartmuseum/helm-push --version ${HELM_PUSH_VERSION} && \
-    helm plugin install https://github.com/codacy/helm-poll/releases/download/latest/helm-poll-linux.tgz && \
+    helm plugin install https://github.com/codacy/helm-poll && \
     helm repo add codacy-stable https://charts.codacy.com/stable/ && \
     curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
     chmod +x /usr/local/bin/kubectl && \
